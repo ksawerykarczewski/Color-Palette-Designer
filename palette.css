@@ -10,7 +10,11 @@ html {
 h1 {
   font-size: 1em;
 }
-.picked-color {
+.picked_color1,
+.picked_color2,
+.picked_color,
+.picked_color3,
+.picked_color4 {
   width: 100px;
   height: 100px;
   background-color: var(--color);

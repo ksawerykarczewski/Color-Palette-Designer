@@ -1,9 +1,18 @@
 // declare variables
 const root = document.documentElement;
+const harmony = document.querySelector("#harmony");
 const colorInput = document.querySelector("#picker");
 const hex = document.querySelector("#hex");
 const rgb = document.querySelector("#rgb");
 const hsl = document.querySelector("#hsl");
+
+const hsl1 = document.querySelector("#hsl1");
+const hex1 = document.querySelector("#hex1");
+const rgb1 = document.querySelector("#rgb1");
+const picked_color1 = document.querySelector(".picked_color1");
+const picked_color2 = document.querySelector(".picked_color2");
+const picked_color3 = document.querySelector(".picked_color3");
+const picked_color4 = document.querySelector(".picked_color4");
 
 // change hex to rgb
 function hexToRGB(h) {
@@ -66,27 +75,48 @@ function rgbToHSL(a) {
     s = s.toFixed(0);
     l = l.toFixed(0);
   }
-
   roundNumbers();
-
-  // Analogous
-  // H is shifted a few degrees for each color. S and L are kept constant
-  // function for checking h degrees
-  if (h <= 90) {
-    console.log("h is less then 90");
-  } else if (h > 90 && h <= 180) {
-    console.log("h is less then 180");
-  } else if (h > 180 && h <= 270) {
-    console.log("h is less then 270");
-  } else if (h > 270 && h <= 360) {
-    console.log("h is less then 360");
-  }
-
-  // end
 
   // return template literals of h s l
   let result = `${h}° ${s}% ${l}%`;
   return result;
+}
+
+// functions for harmonies
+function analogous(x) {
+  // x = x.slice();
+  // let h = x.split(" ")[0];
+  // // let sl = x.substring(x.indexOf(" "));
+  // let s = x.substring(x.indexOf(" ") + 1, x.indexOf("%"));
+  // let l = x.substring(x.lastIndexOf(" ") + 1, x.lastIndexOf("%"));
+  // h = parseInt(h, 10);
+  // h = h + 20;
+  // picked_color1.style.backgroundColor = `hsl(${h}, ${s}%,${l}%)`;
+  // hsl1.textContent = `${h}°, ${s}%, ${l}%`;
+
+  // h = h + 40;
+  // picked_color2.style.backgroundColor = `hsl(${h}, ${s}%,${l}%)`;
+  // hsl2.textContent = `${h}°, ${s}%, ${l}%`;
+  // return `${h}, ${s}, ${l}`;
+
+  x = x.slice();
+  let h = x.split(" ")[0];
+  let s = x.substring(x.indexOf(" ") + 1, x.indexOf("%"));
+  let l = x.substring(x.lastIndexOf(" ") + 1, x.lastIndexOf("%"));
+  h = parseInt(h, 10);
+  h = h + 20;
+  picked_color2.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+  document.querySelector("#hsl2").textContent = `${h} ${s}% ${l}%`;
+  h = h + 10;
+  picked_color1.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+  document.querySelector("#hsl1").textContent = `${h} ${s}% ${l}%`;
+  h = h - 20;
+  picked_color3.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+  document.querySelector("#hsl3").textContent = `${h} ${s}% ${l}%`;
+  h = h - 10;
+  picked_color2.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+  document.querySelector("#hsl4").textContent = `${h} ${s}% ${l}%`;
+  return `${h}, ${s}%, ${l}%`;
 }
 
 function convertValue() {
@@ -97,18 +127,15 @@ function convertValue() {
   rgb.textContent = hexToRGB(hex.textContent);
   //    rgb to hsl
   hsl.textContent = rgbToHSL(rgb.textContent);
-  //   let HSL = hsl.textContent;
-  //   HSL = rgbToHSL(rgb.textContent);
 }
 
-colorInput.addEventListener("change", convertValue);
-
-// show selected harmony
-const harmony = document.querySelector("#harmony");
 function show_selected() {
   const value = harmony[harmony.selectedIndex].value;
-  if (value == "analogous") {
+  if (value == "choose") {
+    console.log("choose");
+  } else if (value == "analogous") {
     console.log("analogous");
+    analogous(hsl.textContent);
   } else if (value == "monochromatic") {
     console.log("monochromatic");
   } else if (value == "triad") {
@@ -121,4 +148,6 @@ function show_selected() {
     console.log("shades");
   }
 }
+
+colorInput.addEventListener("change", convertValue);
 harmony.addEventListener("change", show_selected);
