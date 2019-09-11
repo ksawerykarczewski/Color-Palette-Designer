@@ -1,3 +1,4 @@
+"use strict";
 // declare variables
 const root = document.documentElement;
 const harmony = document.querySelector("#harmony");
@@ -5,7 +6,6 @@ const colorInput = document.querySelector("#picker");
 const hex = document.querySelector("#hex");
 const rgb = document.querySelector("#rgb");
 const hsl = document.querySelector("#hsl");
-
 const hsl1 = document.querySelector("#hsl1");
 const hex1 = document.querySelector("#hex1");
 const rgb1 = document.querySelector("#rgb1");
@@ -17,19 +17,17 @@ const picked_color4 = document.querySelector(".picked_color4");
 // change hex to rgb
 function hexToRGB(h) {
   h = h.replace("#", "");
-  r = parseInt(h.substring(0, 2), 16);
-  g = parseInt(h.substring(2, 4), 16);
-  b = parseInt(h.substring(4, 6), 16);
+  let r = parseInt(h.substring(0, 2), 16);
+  let g = parseInt(h.substring(2, 4), 16);
+  let b = parseInt(h.substring(4, 6), 16);
 
-  result = "(" + r + "," + g + "," + b + ")";
+  let result = "(" + r + "," + g + "," + b + ")";
   return result;
 }
 
 // change rgb to hsl - Fronter code
-
 function rgbToHSL(a) {
   a = a.slice(1, -1);
-  // h = h.slice(1,h.lenght-1);
 
   let r = a.split(",")[0];
   let g = a.split(",")[1];
@@ -82,40 +80,52 @@ function rgbToHSL(a) {
   return result;
 }
 
+// split rgb
+function splitRGB(x) {
+  x = x.slice(1, -1);
+  let r = x.split(",")[0];
+  let g = x.split(",")[1];
+  let b = x.split(",")[2];
+  r = rgbToHex(r);
+  g = rgbToHex(g);
+  b = rgbToHex(b);
+
+  return `#${r}${g}${b}`;
+}
+
+// change rgb to hex
+function rgbToHex(x) {
+  let hex = Number(x).toString(16);
+  if (hex.length < 2) {
+    hex = "0" + hex;
+  }
+  return hex;
+}
+
 // functions for harmonies
 function analogous(x) {
-  // x = x.slice();
-  // let h = x.split(" ")[0];
-  // // let sl = x.substring(x.indexOf(" "));
-  // let s = x.substring(x.indexOf(" ") + 1, x.indexOf("%"));
-  // let l = x.substring(x.lastIndexOf(" ") + 1, x.lastIndexOf("%"));
-  // h = parseInt(h, 10);
-  // h = h + 20;
-  // picked_color1.style.backgroundColor = `hsl(${h}, ${s}%,${l}%)`;
-  // hsl1.textContent = `${h}°, ${s}%, ${l}%`;
-
-  // h = h + 40;
-  // picked_color2.style.backgroundColor = `hsl(${h}, ${s}%,${l}%)`;
-  // hsl2.textContent = `${h}°, ${s}%, ${l}%`;
-  // return `${h}, ${s}, ${l}`;
-
   x = x.slice();
   let h = x.split(" ")[0];
   let s = x.substring(x.indexOf(" ") + 1, x.indexOf("%"));
   let l = x.substring(x.lastIndexOf(" ") + 1, x.lastIndexOf("%"));
   h = parseInt(h, 10);
-  h = h + 20;
-  picked_color2.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
-  document.querySelector("#hsl2").textContent = `${h} ${s}% ${l}%`;
-  h = h + 10;
+
+  h = h + 30;
   picked_color1.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
   document.querySelector("#hsl1").textContent = `${h} ${s}% ${l}%`;
-  h = h - 20;
+
+  h = h - 15;
+  picked_color2.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+  document.querySelector("#hsl2").textContent = `${h} ${s}% ${l}%`;
+
+  h = h - 30;
   picked_color3.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
   document.querySelector("#hsl3").textContent = `${h} ${s}% ${l}%`;
-  h = h - 10;
-  picked_color2.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+
+  h = h - 45;
+  picked_color4.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
   document.querySelector("#hsl4").textContent = `${h} ${s}% ${l}%`;
+
   return `${h}, ${s}%, ${l}%`;
 }
 
@@ -127,6 +137,8 @@ function convertValue() {
   rgb.textContent = hexToRGB(hex.textContent);
   //    rgb to hsl
   hsl.textContent = rgbToHSL(rgb.textContent);
+
+  show_selected();
 }
 
 function show_selected() {
