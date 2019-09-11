@@ -15,6 +15,7 @@ const picked_color3 = document.querySelector(".picked_color3");
 const picked_color4 = document.querySelector(".picked_color4");
 
 // change hex to rgb
+// https://css-tricks.com/converting-color-spaces-in-javascript/
 function hexToRGB(h) {
   h = h.replace("#", "");
   let r = parseInt(h.substring(0, 2), 16);
@@ -25,7 +26,8 @@ function hexToRGB(h) {
   return result;
 }
 
-// change rgb to hsl - Fronter code
+// change rgb to hsl
+// Fronter code
 function rgbToHSL(a) {
   a = a.slice(1, -1);
 
@@ -81,6 +83,7 @@ function rgbToHSL(a) {
 }
 
 // split rgb
+// to use in function displayValues!
 function splitRGB(x) {
   x = x.slice(1, -1);
   let r = x.split(",")[0];
@@ -129,6 +132,38 @@ function analogous(x) {
   return `${h}, ${s}%, ${l}%`;
 }
 
+// TO DO!
+function monochromatic(x) {
+  x = x.slice();
+  let h = x.split(" ")[0];
+  let s = x.substring(x.indexOf(" ") + 1, x.indexOf("%"));
+  let l = x.substring(x.lastIndexOf(" ") + 1, x.lastIndexOf("%"));
+  l = parseInt(l, 10);
+
+  l = l + 10;
+  if (l > 100) {
+    l = 100;
+  }
+  picked_color2.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+  document.querySelector("#hsl2").textContent = `${h} ${s}% ${l}%`;
+  l = l + 10;
+  if (l > 100) {
+    l = 100;
+  }
+  picked_color1.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+  document.querySelector("#hsl1").textContent = `${h} ${s}% ${l}%`;
+  l = l - 30;
+  picked_color3.style.backgroundColor = "`hsl(${h}, ${s}%, ${l}%)`";
+  document.querySelector("#hsl3").textContent = `${h} ${s}% ${l}%`;
+  l = l - 10;
+  picked_color4.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+  document.querySelector("#hsl4").textContent = `${h} ${s}% ${l}%`;
+  return `${h}, ${s}%, ${l}%`;
+}
+
+// function displaying rgb and hex using splitRGB and rgb2Hex in different boxes
+
+// convert values
 function convertValue() {
   root.style.setProperty("--color", colorInput.value);
   //    initial hex
@@ -141,15 +176,15 @@ function convertValue() {
   show_selected();
 }
 
+// show selected harmony
 function show_selected() {
   const value = harmony[harmony.selectedIndex].value;
   if (value == "choose") {
     console.log("choose");
   } else if (value == "analogous") {
-    console.log("analogous");
     analogous(hsl.textContent);
   } else if (value == "monochromatic") {
-    console.log("monochromatic");
+    monochromatic(hsl.textContent);
   } else if (value == "triad") {
     console.log("triad");
   } else if (value == "complementary") {
