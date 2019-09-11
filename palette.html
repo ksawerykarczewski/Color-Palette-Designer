@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="palette.css" />
+    <title>Palette</title>
+  </head>
+  <body>
+    <label> Pick your color</label>
+    <label id="harmonies-selector">
+      <select name="harmony" id="harmony">
+        <option value="analogous">Analogous</option>
+        <option value="monochromatic">Monochromatic</option>
+        <option value="triad">Triad</option>
+        <option value="complementary">Complementary</option>
+        <option value="compound">Compound</option>
+        <option value="shades">Shades</option>
+      </select>
+    </label>
+    <input type="color" id="picker" value="#ffffff" />
+    <div class="grid_boxes">
+      <div class="box">
+        <div class="picked-color"></div>
+        <h1>HEX: <span id="hex">#ffffff</span></h1>
+        <h1>RGB: rgb<span id="rgb">(255, 255, 255)</span></h1>
+        <h1>HSL: <span id="hsl">0° 0% 100%</span></h1>
+      </div>
+      <div class="box">
+        <div class="picked-color"></div>
+        <h1>HEX: <span id="hex">#ffffff</span></h1>
+        <h1>RGB: rgb<span id="rgb">(255, 255, 255)</span></h1>
+        <h1>HSL: <span id="hsl">0° 0% 100%</span></h1>
+      </div>
+      <div class="box">
+        <div class="picked-color"></div>
+        <h1>HEX: <span id="hex">#ffffff</span></h1>
+        <h1>RGB: rgb<span id="rgb">(255, 255, 255)</span></h1>
+        <h1>HSL: <span id="hsl">0° 0% 100%</span></h1>
+      </div>
+      <div class="box">
+        <div class="picked-color"></div>
+        <h1>HEX: <span id="hex">#ffffff</span></h1>
+        <h1>RGB: rgb<span id="rgb">(255, 255, 255)</span></h1>
+        <h1>HSL: <span id="hsl">0° 0% 100%</span></h1>
+      </div>
+      <div class="box">
+        <div class="picked-color"></div>
+        <h1>HEX: <span id="hex">#ffffff</span></h1>
+        <h1>RGB: rgb<span id="rgb">(255, 255, 255)</span></h1>
+        <h1>HSL: <span id="hsl">0° 0% 100%</span></h1>
+      </div>
+    </div>
+  </body>
+  <script src="palette.js"></script>
+</html>
