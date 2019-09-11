@@ -196,5 +196,6 @@ function show_selected() {
   }
 }
 
+// event listeners
 colorInput.addEventListener("change", convertValue);
 harmony.addEventListener("change", show_selected);
