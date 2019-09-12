@@ -19,7 +19,7 @@ const picked_color4 = document.querySelector(".picked_color4");
 
 // change hex to rgb
 // https://css-tricks.com/converting-color-spaces-in-javascript/
-function hexToRGB(h) {
+function hex2RGB(h) {
   h = h.replace("#", "");
   let r = parseInt(h.substring(0, 2), 16);
   let g = parseInt(h.substring(2, 4), 16);
@@ -243,7 +243,7 @@ function convertValue() {
   //    initial hex
   hex.textContent = colorInput.value;
   //    hex to rgb
-  rgb.textContent = hexToRGB(hex.textContent);
+  rgb.textContent = hex2RGB(hex.textContent);
   //    rgb to hsl
   hsl.textContent = rgbToHSL(rgb.textContent);
 

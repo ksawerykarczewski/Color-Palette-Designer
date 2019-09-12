@@ -1,6 +1,9 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:100&display=swap");
 body,
 html {
   margin: 0;
+  background-color: #f9f9f9;
+  font-family: "Roboto", sans-serif;
 }
 
 .box {
@@ -28,11 +31,13 @@ h1 {
   border-radius: 1px;
   outline: none;
   border-color: black;
-  box-shadow: 0 0 5px black;
+  box-shadow: 1px 1px 5px black;
 }
 
 #picker {
-  padding-bottom: 1em;
+  background-color: #f9f9f9;
+  width: 30px;
+  height: 30px;
 }
 
 input {
