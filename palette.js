@@ -3,12 +3,15 @@
 const root = document.documentElement;
 const harmony = document.querySelector("#harmony");
 const colorInput = document.querySelector("#picker");
+
 const hex = document.querySelector("#hex");
 const rgb = document.querySelector("#rgb");
 const hsl = document.querySelector("#hsl");
+
 const hsl1 = document.querySelector("#hsl1");
 const hex1 = document.querySelector("#hex1");
 const rgb1 = document.querySelector("#rgb1");
+
 const picked_color1 = document.querySelector(".picked_color1");
 const picked_color2 = document.querySelector(".picked_color2");
 const picked_color3 = document.querySelector(".picked_color3");
@@ -28,6 +31,7 @@ function hexToRGB(h) {
 
 // change rgb to hsl
 // Fronter code
+
 function rgbToHSL(a) {
   a = a.slice(1, -1);
 
@@ -83,7 +87,6 @@ function rgbToHSL(a) {
 }
 
 // split rgb
-// to use in function displayValues!
 function splitRGB(x) {
   x = x.slice(1, -1);
   let r = x.split(",")[0];
@@ -106,11 +109,12 @@ function rgbToHex(x) {
 }
 
 // functions for harmonies
-function analogous(x) {
-  x = x.slice();
-  let h = x.split(" ")[0];
-  let s = x.substring(x.indexOf(" ") + 1, x.indexOf("%"));
-  let l = x.substring(x.lastIndexOf(" ") + 1, x.lastIndexOf("%"));
+
+function analogous(rgb) {
+  rgb = rgb.slice();
+  let h = rgb.split(" ")[0];
+  let s = rgb.substring(rgb.indexOf(" ") + 1, rgb.indexOf("%"));
+  let l = rgb.substring(rgb.lastIndexOf(" ") + 1, rgb.lastIndexOf("%"));
   h = parseInt(h, 10);
 
   h = h + 30;
@@ -132,38 +136,108 @@ function analogous(x) {
   return `${h}, ${s}%, ${l}%`;
 }
 
-// TO DO!
-function monochromatic(x) {
-  x = x.slice();
-  let h = x.split(" ")[0];
-  let s = x.substring(x.indexOf(" ") + 1, x.indexOf("%"));
-  let l = x.substring(x.lastIndexOf(" ") + 1, x.lastIndexOf("%"));
+function triad(rgb) {
+  rgb = rgb.slice();
+  let h = rgb.split(" ")[0];
+  let s = rgb.substring(rgb.indexOf(" ") + 1, rgb.indexOf("%"));
+  let l = rgb.substring(rgb.lastIndexOf(" ") + 1, rgb.lastIndexOf("%"));
   l = parseInt(l, 10);
+  h = parseInt(h, 10);
 
-  l = l + 10;
-  if (l > 100) {
-    l = 100;
+  h = h - 120;
+  picked_color1.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+  hsl1.textContent = `${h} ${s}% ${l}%`;
+  l = l - 15;
+  if (l < 0) {
+    l = 0;
   }
   picked_color2.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
   document.querySelector("#hsl2").textContent = `${h} ${s}% ${l}%`;
-  l = l + 10;
+
+  h = h + 240;
+  picked_color4.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+  document.querySelector("#hsl4").textContent = `${h} ${s}% ${l}%`;
+  l = l + 30;
   if (l > 100) {
     l = 100;
   }
-  picked_color1.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
-  document.querySelector("#hsl1").textContent = `${h} ${s}% ${l}%`;
-  l = l - 30;
-  picked_color3.style.backgroundColor = "`hsl(${h}, ${s}%, ${l}%)`";
+  picked_color3.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
   document.querySelector("#hsl3").textContent = `${h} ${s}% ${l}%`;
-  l = l - 10;
-  picked_color4.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
-  document.querySelector("#hsl4").textContent = `${h} ${s}% ${l}%`;
+
   return `${h}, ${s}%, ${l}%`;
 }
 
-// function displaying rgb and hex using splitRGB and rgb2Hex in different boxes
+function complementary(rgb) {
+  rgb = rgb.slice();
+  let h = rgb.split(" ")[0];
+  let s = rgb.substring(rgb.indexOf(" ") + 1, rgb.indexOf("%"));
+  let l = rgb.substring(rgb.lastIndexOf(" ") + 1, rgb.lastIndexOf("%"));
+  l = parseInt(l, 10);
+  h = parseInt(h, 10);
 
-// convert values
+  l = l - 15;
+  if (l < 0) {
+    l = 0;
+  }
+  picked_color1.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+  hsl1.textContent = `${h} ${s}% ${l}%`;
+  l = l - 15;
+  picked_color2.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+  document.querySelector("#hsl2").textContent = `${h} ${s}% ${l}%`;
+  l = l + 30;
+  if (l > 100) {
+    l = 100;
+  }
+  h = h + 180;
+  picked_color3.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+  document.querySelector("#hsl3").textContent = `${h} ${s}% ${l}%`;
+  l = l + 15;
+  if (l > 100) {
+    l = 100;
+  }
+  picked_color4.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+  document.querySelector("#hsl4").textContent = `${h} ${s}% ${l}%`;
+
+  return `${h}, ${s}%, ${l}%`;
+}
+
+function compound(rgb) {
+  rgb = rgb.slice();
+  let h = rgb.split(" ")[0];
+  let s = rgb.substring(rgb.indexOf(" ") + 1, rgb.indexOf("%"));
+  let l = rgb.substring(rgb.lastIndexOf(" ") + 1, rgb.lastIndexOf("%"));
+  l = parseInt(l, 10);
+  h = parseInt(h, 10);
+
+  h = h + 20;
+  picked_color2.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+  document.querySelector("#hsl2").textContent = `${h} ${s}% ${l}%`;
+
+  h = h + 10;
+  picked_color1.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+  document.querySelector("#hsl1").textContent = `${h} ${s}% ${l}%`;
+
+  h = h + 150;
+  picked_color3.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+  document.querySelector("#hsl3").textContent = `${h} ${s}% ${l}%`;
+  l = l + 15;
+  if (l > 100) {
+    l = 100;
+  }
+  picked_color4.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+  document.querySelector("#hsl4").textContent = `${h} ${s}% ${l}%`;
+
+  return `${h}, ${s}%, ${l}%`;
+}
+
+// TO DO: mono and shades!
+
+// function monochromatic(rgb) {
+// }
+
+// function shades(rgb) {
+// }
+
 function convertValue() {
   root.style.setProperty("--color", colorInput.value);
   //    initial hex
@@ -174,25 +248,45 @@ function convertValue() {
   hsl.textContent = rgbToHSL(rgb.textContent);
 
   show_selected();
+
+  rgb1.textContent = picked_color1.style.backgroundColor.substring(3);
+  hex1.textContent = splitRGB(rgb1.textContent);
+
+  document.querySelector(
+    "#rgb2"
+  ).textContent = picked_color2.style.backgroundColor.substring(3);
+  document.querySelector(
+    "#rgb3"
+  ).textContent = picked_color3.style.backgroundColor.substring(3);
+  document.querySelector(
+    "#rgb4"
+  ).textContent = picked_color4.style.backgroundColor.substring(3);
+  document.querySelector("#hex2").textContent = splitRGB(
+    document.querySelector("#rgb2").textContent
+  );
+  document.querySelector("#hex3").textContent = splitRGB(
+    document.querySelector("#rgb3").textContent
+  );
+  document.querySelector("#hex4").textContent = splitRGB(
+    document.querySelector("#rgb4").textContent
+  );
 }
 
 // show selected harmony
 function show_selected() {
   const value = harmony[harmony.selectedIndex].value;
-  if (value == "choose") {
-    console.log("choose");
-  } else if (value == "analogous") {
+  if (value == "analogous") {
     analogous(hsl.textContent);
   } else if (value == "monochromatic") {
-    monochromatic(hsl.textContent);
+    // monochromatic(hsl.textContent);
   } else if (value == "triad") {
-    console.log("triad");
+    triad(hsl.textContent);
   } else if (value == "complementary") {
-    console.log("complementary");
+    complementary(hsl.textContent);
   } else if (value == "compound") {
-    console.log("compound");
+    compound(hsl.textContent);
   } else if (value == "shades") {
-    console.log("shades");
+    // shades(hsl.textContent);
   }
 }
 
