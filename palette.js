@@ -32,12 +32,12 @@ function hex2RGB(h) {
 // change rgb to hsl
 // Fronter code
 
-function rgbToHSL(a) {
-  a = a.slice(1, -1);
+function rgbToHSL(rgb) {
+  rgb = rgb.slice(1, -1);
 
-  let r = a.split(",")[0];
-  let g = a.split(",")[1];
-  let b = a.split(",")[2];
+  let r = rgb.split(",")[0];
+  let g = rgb.split(",")[1];
+  let b = rgb.split(",")[2];
 
   r /= 255;
   g /= 255;
@@ -87,11 +87,11 @@ function rgbToHSL(a) {
 }
 
 // split rgb
-function splitRGB(x) {
-  x = x.slice(1, -1);
-  let r = x.split(",")[0];
-  let g = x.split(",")[1];
-  let b = x.split(",")[2];
+function splitRGB(rgb) {
+  rgb = rgb.slice(1, -1);
+  let r = rgb.split(",")[0];
+  let g = rgb.split(",")[1];
+  let b = rgb.split(",")[2];
   r = rgbToHex(r);
   g = rgbToHex(g);
   b = rgbToHex(b);
@@ -110,11 +110,11 @@ function rgbToHex(x) {
 
 // functions for harmonies
 
-function analogous(rgb) {
-  rgb = rgb.slice();
-  let h = rgb.split(" ")[0];
-  let s = rgb.substring(rgb.indexOf(" ") + 1, rgb.indexOf("%"));
-  let l = rgb.substring(rgb.lastIndexOf(" ") + 1, rgb.lastIndexOf("%"));
+function analogous(hsl) {
+  hsl = hsl.slice();
+  let h = hsl.split(" ")[0];
+  let s = hsl.substring(hsl.indexOf(" ") + 1, hsl.indexOf("%"));
+  let l = hsl.substring(hsl.lastIndexOf(" ") + 1, hsl.lastIndexOf("%"));
   h = parseInt(h, 10);
 
   h = h + 30;
@@ -136,11 +136,11 @@ function analogous(rgb) {
   return `${h}, ${s}%, ${l}%`;
 }
 
-function triad(rgb) {
-  rgb = rgb.slice();
-  let h = rgb.split(" ")[0];
-  let s = rgb.substring(rgb.indexOf(" ") + 1, rgb.indexOf("%"));
-  let l = rgb.substring(rgb.lastIndexOf(" ") + 1, rgb.lastIndexOf("%"));
+function triad(hsl) {
+  hsl = hsl.slice();
+  let h = hsl.split(" ")[0];
+  let s = hsl.substring(hsl.indexOf(" ") + 1, hsl.indexOf("%"));
+  let l = hsl.substring(hsl.lastIndexOf(" ") + 1, hsl.lastIndexOf("%"));
   l = parseInt(l, 10);
   h = parseInt(h, 10);
 
@@ -167,11 +167,11 @@ function triad(rgb) {
   return `${h}, ${s}%, ${l}%`;
 }
 
-function complementary(rgb) {
-  rgb = rgb.slice();
-  let h = rgb.split(" ")[0];
-  let s = rgb.substring(rgb.indexOf(" ") + 1, rgb.indexOf("%"));
-  let l = rgb.substring(rgb.lastIndexOf(" ") + 1, rgb.lastIndexOf("%"));
+function complementary(hsl) {
+  hsl = hsl.slice();
+  let h = hsl.split(" ")[0];
+  let s = hsl.substring(hsl.indexOf(" ") + 1, hsl.indexOf("%"));
+  let l = hsl.substring(hsl.lastIndexOf(" ") + 1, hsl.lastIndexOf("%"));
   l = parseInt(l, 10);
   h = parseInt(h, 10);
 
@@ -201,11 +201,11 @@ function complementary(rgb) {
   return `${h}, ${s}%, ${l}%`;
 }
 
-function compound(rgb) {
-  rgb = rgb.slice();
-  let h = rgb.split(" ")[0];
-  let s = rgb.substring(rgb.indexOf(" ") + 1, rgb.indexOf("%"));
-  let l = rgb.substring(rgb.lastIndexOf(" ") + 1, rgb.lastIndexOf("%"));
+function compound(hsl) {
+  hsl = hsl.slice();
+  let h = hsl.split(" ")[0];
+  let s = hsl.substring(hsl.indexOf(" ") + 1, hsl.indexOf("%"));
+  let l = hsl.substring(hsl.lastIndexOf(" ") + 1, hsl.lastIndexOf("%"));
   l = parseInt(l, 10);
   h = parseInt(h, 10);
 
